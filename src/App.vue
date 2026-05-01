@@ -6,12 +6,12 @@
       </keep-alive>
     </router-view>
     <AppTabbar v-if="showTabbar" />
-    <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
+    <LoginModal v-if="userStore.showLoginModal" @close="handleCloseLoginModal" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import AppTabbar from '@/components/AppTabbar.vue'
 import LoginModal from '@/components/LoginModal.vue'
@@ -25,16 +25,9 @@ const showTabbar = computed(() => {
   return !noTabbarRoutes.some(r => route.path.startsWith(r))
 })
 
-const showLoginModal = computed(() => userStore.showLoginModal)
-
-watch(
-  () => userStore.showLoginModal,
-  (val) => {
-    if (val) {
-      // 打开登录弹窗时的处理
-    }
-  }
-)
+const handleCloseLoginModal = () => {
+  userStore.closeLoginModal()
+}
 </script>
 
 <style lang="css">

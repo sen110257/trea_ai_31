@@ -93,7 +93,7 @@
       <button 
         class="publish-btn" 
         :class="{ disabled: !canSubmit || publishing }"
-        :disabled="!canSubmit || publishing"
+        :disabled="publishing"
         @click="handlePublish"
       >
         {{ publishing ? '发布中...' : '发布故事' }}
